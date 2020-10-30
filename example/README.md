@@ -1,4 +1,4 @@
-## flutter_linkedin
+## example
 
 - A Flutter Package to login and get Profile Details from linkedIn.
 
