@@ -39,11 +39,16 @@ class _LinkedInWebViewState extends State<LinkedInWebView> {
           Navigator.pop(context,
               AuthorizationSuccessResponse.fromJson(uri.queryParameters));
           isPoped = true;
-        } else if (uri.queryParameters.containsKey('error')) {
+        }
+        else if (uri.queryParameters.containsKey('error')) {
           Navigator.pop(context,
               AuthorizationErrorResponse.fromJson(uri.queryParameters));
           isPoped = true;
-        } else {
+        }
+        else if (uri.toString() == widget.redirectUri) {
+
+        }
+        else {
           Navigator.pop(context);
           isPoped = true;
         }
@@ -65,7 +70,6 @@ class _LinkedInWebViewState extends State<LinkedInWebView> {
 
   @override
   Widget build(BuildContext context) {
-//    print(widget.destroySession);
     return WebviewScaffold(
       url: getAuthorizationUrl(
         clientId: widget.clientId,
