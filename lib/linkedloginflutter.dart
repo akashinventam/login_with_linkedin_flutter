@@ -18,6 +18,7 @@ class LinkedInLogin {
 
 //  LinkedInLogin._internal();
   LinkedInLogin._();
+
   static void initialize(BuildContext context,
       {@required String clientId,
       @required String clientSecret,
@@ -64,14 +65,17 @@ class LinkedInLogin {
   Future<String> _loginForAccessToken(
       {PreferredSizeWidget appBar, bool destroySession = true}) async {
     final authorizationData = await showDialog(
-        context: context,
-        child: LinkedInWebView(
+      context: context,
+      builder: (_) {
+        return LinkedInWebView(
           clientId: clientId,
           clientSecret: clientSecret,
           redirectUri: redirectUri,
           appBar: appBar,
           destroySession: destroySession,
-        )).catchError((error) {
+        );
+      },
+    ).catchError((error) {
       if (error is AuthorizationErrorResponse)
         throw error;
       else
