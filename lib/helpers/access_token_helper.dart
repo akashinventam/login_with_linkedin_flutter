@@ -31,11 +31,12 @@ Future<String> getAccessToken({
   @required String code,
   String grantType = 'code',
 }) async {
-  final response = await http.get(getAccessTokenUrl(
+  final String url = getAccessTokenUrl(
       clientId: clientId,
       clientSecret: clientSecret,
       redirectUri: redirectUri,
-      code: code));
+      code: code);
+  final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200)
     return (json.decode(response.body))['access_token'];
