@@ -11,7 +11,7 @@ import 'package:flutter_linkedin/data_model/profile_error.dart';
 
 Future<LinkedInEmail> getEmailResponse({@required String accessToken}) async {
   final response = await http
-      .get(linkedInEmailUrl, headers: {'Authorization': 'Bearer $accessToken'});
+      .get(Uri.parse(linkedInEmailUrl), headers: {'Authorization': 'Bearer $accessToken'});
 
   if (response.statusCode == 200)
     return linkedInEmailFromJson(response.body);
